@@ -1,13 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 
 import { Titulos } from "./components/Titulos";
-
-function showAdditional(additional) {
-  const alertInformation = Object.entries(additional)
-    .map((information) => `${information[0]}: ${information[1]}`)
-    .join("\n");
-  alert(alertInformation);
-}
+import Todos from "./components/Todos";
 
 function App() {
   const url = "https://jsonplaceholder.typicode.com/todos";
@@ -29,9 +23,13 @@ function App() {
       <div className="MyApp">
         <h1 className="padding">Reviews API</h1>
         <hr />
-        <h3>Cargando de una API muy sencillita, los 5 primeros elementos</h3>
+        <h3>
+          Cargando de una API de todos sus elementos. En el que almacena cada
+          elemento clickado
+        </h3>
         <hr />
-        {!todos ? "Cargando..." : <Titulos todos={todos} />}
+        <Todos />
+        {/* {!todos ? "Cargando..." : <Titulos todos={todos} />} */}
       </div>
     </Fragment>
   );

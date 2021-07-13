@@ -6,7 +6,7 @@ export const Titulos = ({ todos }) => {
   //   console.log(result);
   return (
     <div>
-      {todos.slice(0, 5).map((elemento) => (
+      {todos.slice(0, 10).map((elemento) => (
         <p key={elemento.id}>
           {" "}
           {elemento.id} {") "}
