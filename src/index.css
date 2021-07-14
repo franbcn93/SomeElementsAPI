@@ -33,3 +33,16 @@ code {
   text-align: center;
   width: 100%;
 }
+
+.mycard {
+  float: left;
+  margin: 3px;
+  padding: 10px 3px;
+  width: calc(100% / 3 - 10px);
+}
+.flag {
+  width: 182px;
+  height: 110px;
+  border: 1px solid;
+  margin-bottom: 15px;
+}

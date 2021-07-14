@@ -21,15 +21,11 @@ function App() {
   return (
     <Fragment>
       <div className="MyApp">
-        <h1 className="padding">Reviews API</h1>
+        <h1 className="padding">Countries API</h1>
         <hr />
-        <h3>
-          Cargando de una API de todos sus elementos. En el que almacena cada
-          elemento clickado
-        </h3>
+        <h3>Load data from all countries. You can also see their flag.</h3>
         <hr />
         <Todos />
-        {/* {!todos ? "Cargando..." : <Titulos todos={todos} />} */}
       </div>
     </Fragment>
   );

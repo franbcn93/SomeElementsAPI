@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Card } from "./Card";
 
 export default class Todos extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class Todos extends Component {
     this.state = {
       resultados: [],
       error: false,
+      clickado: "",
     };
 
     // Este enlace es necesario para hacer que `this` funcione en el callback
@@ -15,7 +17,7 @@ export default class Todos extends Component {
 
   //   Ser montará antes de que renderizemos
   componentWillMount() {
-    fetch("https://jsonplaceholder.typicode.com/todos")
+    fetch("https://restcountries.eu/rest/v2/all")
       .then((response) => {
         if (!response.ok) {
           throw Error("Error");
@@ -23,18 +25,21 @@ export default class Todos extends Component {
         return response.json();
       })
       .then((resp) => {
+        // console.log(resp);
         this.setState({ resultados: resp });
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         this.setState((prevState) => ({
           error: !prevState.error,
         }));
       });
   }
 
-  handleClick(text) {
-    console.log("Has hecho click en el elemento " + text);
+  handleClick(text, imagen) {
+    // console.log("Has hecho click en el elemento " + text);
+    // console.log(imagen);
+    this.setState({ clickado: imagen });
   }
 
   render() {
@@ -42,10 +47,18 @@ export default class Todos extends Component {
     if (e.resultados.length > 0) {
       return (
         <div className="container-fluid">
+          {/* <p>{e.clickado}</p>
+          <img src={e.clickado} alt="" /> */}
           {e.resultados.map((el) => (
-            <li key={el.id} onClick={() => this.handleClick(el.id)}>
-              {el.id}: {el.title}-{el.completed ? "✅" : "❌"}
-            </li>
+            //   <Fragment>
+            //   <Card key={el.alpha3Code} onClick={() => this.handleClick(el.name)} />
+            // </Fragment>
+            <div
+              key={el.alpha3Code}
+              onClick={() => this.handleClick(el.name, el.flag)}
+            >
+              <Card datos={el} />
+            </div>
           ))}
         </div>
       );
