@@ -1,4 +1,27 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 export const Card = ({ datos }) => {
   const {
@@ -11,6 +34,22 @@ export const Card = ({ datos }) => {
     flag,
     currencies,
   } = datos;
+
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+
+  const [bandera, guardarBandera] = useState(null);
+
+  const classes = useStyles();
+
+  const handleOpen = () => {
+    console.log(flag);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Fragment>
@@ -49,16 +88,30 @@ export const Card = ({ datos }) => {
                 <p>
                   NativeName:<b> {nativeName} </b>{" "}
                 </p>
-
-                <a
-                  href={flag}
-                  target="flag"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
                   className="btn btn-primary btn-block"
+                  onClick={() => {
+                    guardarBandera(flag);
+                    handleOpen();
+                  }}
                 >
-                  {" "}
-                  Look his flag
-                </a>
+                  Show his flag
+                </button>
+                <Modal
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                  open={open}
+                  onClose={() => {
+                    handleClose();
+                    guardarBandera(null);
+                  }}
+                >
+                  <div style={modalStyle} className={classes.paper}>
+                    <h2 id="simple-modal-title">{name}</h2>
+                    <img className="img-fluid my-4" src={bandera} />
+                  </div>
+                </Modal>
               </div>
             </div>
           </div>

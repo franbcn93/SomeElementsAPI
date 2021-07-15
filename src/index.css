@@ -46,3 +46,7 @@ code {
   border: 1px solid;
   margin-bottom: 15px;
 }
+
+.border-dark {
+  min-height: 448px;
+}

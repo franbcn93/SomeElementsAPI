@@ -67,7 +67,7 @@ export default class Todos extends Component {
       //   Nos da un mensaje de Cargando / O uno de Error
       return (
         <p className="text-center">
-          {this.state.error ? "Algo salió mal..." : "Cargando datos..."}
+          {this.state.error ? "Something went wrong..." : "Loading data..."}
         </p>
       );
     }
